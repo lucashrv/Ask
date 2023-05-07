@@ -1,0 +1,35 @@
+<%- include('./partials/header.ejs') %>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <h1><%= question.title %></h1>
+        <p><%= question.description %></p>
+        <hr>
+
+        <form method="post" action="/response">
+            <h3>Responda</h3>
+            <textarea placeholder="Digite sua resposta" class="form-control mt-3" name="message" id="" rows="5"></textarea>
+            <input type="hidden" name="pergunta" value="<%= question.id %>" >
+            <button class="btn btn-primary mt-3">Responder</button>
+        </form>
+
+        <hr>
+        <h3>Respostas</h2>
+        <hr>
+        <% if(response.length === 0){ %>
+            <h5 class="text-info">Essa pergunta não possui respostas!</h5>
+            <p class="text-info">Realize a primeira resposta</p>
+        <% } %>
+        <% response.forEach((res) => { %>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <%= res.message %>
+                </div>
+            </div>
+        <% }) %>
+        <br class="mb-5">
+    </div>
+</body>
+<%- include('./partials/footer.ejs') %>
